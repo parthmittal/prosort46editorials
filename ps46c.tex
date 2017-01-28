@@ -1,0 +1,28 @@
+\section{Problem C}
+\subsection{Statement}
+\href{http://foobar.iiitd.edu.in/contest/team/problem.php?id=529}{click}
+
+\subsection{Solution}
+Claim: Any subarray which has median $B$ includes $B$.
+While this may seem obvious, it is actually a useful insight.
+
+The idea of the algorithm is to build a subarray starting at $B$, and extending
+to the right, and then figuring out how many subarrays ending exactly before $B$,
+combined with the subarray we just built, have median $B$.
+
+For a subarray $S$, let $(l, g)$ denote the number of elements in $S$ which are
+less than $B$, and $r$ denote the number of elements in $S$ which are greater
+than $B$. Then note that $B$ is median of $S$ $\iff B \in S$ and $l = g$.
+
+Note further that when two subarrays $P$ and $Q$ are joined into one subarray
+$S$, then $(l_S, g_S) = (l_P + l_Q, g_P + g_Q) \implies l_S = g_S
+\iff l_P - g_P = -(l_Q - g_Q)$.
+So it turns out that in the search for subarrays ending just to the left of $B$,
+the only interesting property is $l - g$, and also $-N < l - g < N$.
+
+So we iterate to the left, starting with an empty array (with $(l, g) = (0, 0)$),
+and then iteratively add the rightmost element to the left of $B$, then the subsequent
+one, and so on. And on each step, we add one to the count of $l - g$.
+
+Then, while iterating to the right as in the original idea, we just have to look up the
+corresponding count.
