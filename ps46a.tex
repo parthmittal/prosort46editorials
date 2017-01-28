@@ -1,0 +1,12 @@
+\section{Problem A}
+\subsection{Statement}
+Given an $N \times N$ array of characters, and the ability to swap any two adjacent characters 
+in the same row any number of times, determine if it is possible to get an array
+where every row is sorted, and every column is also sorted.
+
+\subsection{Solution}
+Note that there is exactly one configuration in which the rows are sorted, which is achievable
+because we have a swap operation. So we just have to reach this configuration, and check whether 
+it satisfies the second requirement also.
+You can use any sorting algorithm which is $O(N^2)$ to sort.
+Of course it is convenient to use your language's \verb|sort()| function.
