@@ -16,7 +16,7 @@ This is now much easier to solve, as we should only add new elements, without re
 order elements were added and are only interested in the set. 
 
 Calculate the following dynamic programming: $dp[mask]$ = the probability to have the set given by some $mask$ at some point of the 
-process. We can move from this state to all $new_mask$ that are equal to $mask + (1 << i)$ for all $i$ not present in $mask$.
+process. We can move from this state to all $new_{mask}$ that are equal to $mask + (1 << i)$ for all $i$ not present in $mask$.
 
 Now, to obtain the answer for some particular element we just have to pick all $mask$ of size $k$ that contain this element.
 
