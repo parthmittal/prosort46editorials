@@ -1,33 +1,33 @@
 \section{Problem B}
-\subsection{Statement}
-\href{http://foobar.iiitd.edu.in/contest/team/problem.php?id=528}{click}
+	\subsection{Statement}
+		\href{http://foobar.iiitd.edu.in/contest/team/problem.php?id=528}{click}
 
-\subsection{Solution}
-Let's consider the leftmost detector, say $P_x, C_x$. Now, all calls that it detects
-must start to its left, and end to its right. Since we are trying to minimise the total number
-of calls, it makes no sense to have any calls starting and ending to its left, since they
-will not be detected by any detector.
-So, we want to start exactly $C_x$ calls to its left, and have them end to its right.
+	\subsection{Solution}
+		Let's consider the leftmost detector, say $P_x, C_x$. Now, all calls that it detects
+		must start to its left, and end to its right. Since we are trying to minimise the total number
+		of calls, it makes no sense to have any calls starting and ending to its left, since they
+		will not be detected by any detector.
+		So, we want to start exactly $C_x$ calls to its left, and have them end to its right.
 
-But what about where to end these calls? Clearly, since we want to minimise the total number
-of calls, it makes the most sense to end them as late as possible (so they can trigger
-as many detectors as possible). This is, of course, subject to the number of calls detected
-by each detector, otherwise we would just end them all on the right most house.
+		But what about where to end these calls? Clearly, since we want to minimise the total number
+		of calls, it makes the most sense to end them as late as possible (so they can trigger
+		as many detectors as possible). This is, of course, subject to the number of calls detected
+		by each detector, otherwise we would just end them all on the right most house.
 
-What about the next left-most detector, say $P_y, C_y$?
-\begin{itemize}
-\item If we have $C_y < C_x$, then clearly some of the $C_x$ calls started before $P_x$
-must end before $P_y$. How many? Exactly $C_x - C_y$, since the rest can safely end later
-without violating this detector's data. Note that in this case, no extra calls are started.
+		What about the next left-most detector, say $P_y, C_y$?
+		\begin{itemize}
+		\item If we have $C_y < C_x$, then clearly some of the $C_x$ calls started before $P_x$
+		must end before $P_y$. How many? Exactly $C_x - C_y$, since the rest can safely end later
+		without violating this detector's data. Note that in this case, no extra calls are started.
 
-\item If we have $C_y > C_x$, then we need to start some additional calls so we can meet this
-detector's data. How many? Exactly $C_y - C_x$. Note that in this case, this number \emph{does}
-add to the total number of calls, and this is the only scenario where the total increases.
-\end{itemize}
+		\item If we have $C_y > C_x$, then we need to start some additional calls so we can meet this
+		detector's data. How many? Exactly $C_y - C_x$. Note that in this case, this number \emph{does}
+		add to the total number of calls, and this is the only scenario where the total increases.
+		\end{itemize}
 
-NB: we have an algorithm that requires us to iterate from the left most detector, to the 
-rightmost detector. We can do this by first sorting the detectors by $P$. Any sort which is
-$O(N\log N)$ should suffice. In C++, this is quite easy to do, by making an array
-(or \verb|std::vector|) of \verb|std::pair| and then calling \verb|std::sort| with the right
-bounds, since the default comparison for \verb|std::pair| is to compare the first element, and
-break ties using the second. 
+		NB: we have an algorithm that requires us to iterate from the left most detector, to the 
+		rightmost detector. We can do this by first sorting the detectors by $P$. Any sort which is
+		$O(N\log N)$ should suffice. In C++, this is quite easy to do, by making an array
+		(or \verb|std::vector|) of \verb|std::pair| and then calling \verb|std::sort| with the right
+		bounds, since the default comparison for \verb|std::pair| is to compare the first element, and
+		break ties using the second. 
