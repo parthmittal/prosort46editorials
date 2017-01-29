@@ -1,0 +1,28 @@
+\section{Problem E}
+	\subsection{Statement}
+		\href{http://foobar.iiitd.edu.in/contest/team/problem.php?id=531}{click}
+
+	\subsection{Solution}
+		We can use Sieve of Eratosthenes to find the first K prime numbers.\\
+
+		Now we mark the square with $0$ and circles with $1 \ldots N$. Since, it would be impossible to simulate the entire game within the time limit, we first determine an elgorithm that will help us find $A's$ final position. Let\char39s assume that currently $A$ is on position $x$ and the current prime is $p$:
+		\begin{itemize}
+			\item If $x = 0$, then $A$ is in the square so $x$ becomes $p \bmod N$.
+			\item Else, if $x \neq 0$, then we can determine how many times the person in the sqaure changes place with $x$:
+				\begin{itemize}
+					\item If $x \leq (p \bmod (N-1))$, then $x$ becomes $(x-1) \bmod N$.
+					\item Regardless of where $x$ is, $x$ is updated to $x - \left\lfloor\frac{p}{N-1}\right\rfloor$.
+				\end{itemize}
+		\end{itemize}
+
+		We\char39ve figured out where $A$ will be finally. Now, we need to answer who will its neighbours be. For that we have to answer the query of type, "Given final position $x$, find the initial position for it"
+
+		Let\char39s assume we know position $x$ after prime $p$ was played. We have to find the position before that round.
+		\begin{itemize}
+			\item If $x = p \bmod N$, then $x$ becomes $0$.
+			\item Else, if $x \neq p \bmod N$:
+				\begin{itemize}
+					\item If $x \leq (p \bmod (N-1))$, then $x$ becomes $(x+1) \bmod N$.
+					\item Regardless of where $x$ is, $x$ is updated to $x + \left\lfloor\frac{p}{N-1}\right\rfloor$.
+				\end{itemize}
+		\end{itemize}
