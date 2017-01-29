@@ -1,0 +1,24 @@
+\section{Problem F}
+\subsection{Statement}
+\href{http://foobar.iiitd.edu.in/contest/team/problem.php?id=532}{click}
+
+\subsection{Solution}
+The key idea of this problem is to consider the process backwards. If we fix some very far moment of time (i.e $10^{50}$, as in the 
+problem statement), and now look operation in the reverse direction, the problem becomes the following: a ball is chosen with probability
+$p_i$ and if it is not present in the current set, we add it there. We stop if there are $k$ elements in the set. What is the probability
+the $i$-th element will be present in the set at the end? 
+
+The intuition behind that is, consider a long time to have passed. Which balls are in the tower? The last $k$ distinct balls
+which were picked will be in the tower. So going backwards, we pick a ball. If it is already in the tower, we can ignore it since
+we're looking for the last $k$ \emph{distinct} balls. We keep picking a ball until we have $k$ elements in the tower, and then we stop.
+
+This is now much easier to solve, as we should only add new elements, without removing anything. As a result, we do not have to store the
+order elements were added and are only interested in the set. 
+
+Calculate the following dynamic programming: $dp[mask]$ = the probability to have the set given by some $mask$ at some point of the 
+process. We can move from this state to all $new_{mask}$ that are equal to $mask + (1 << i)$ for all $i$ not present in $mask$.
+
+Now, to obtain the answer for some particular element we just have to pick all $mask$ of size $k$ that contain this element.
+
+One detail we have to deal with is that zero probability $p_i = 0$ is allowed. Remove all such elements from the set and reduce the value
+of $k$ if $n$ becomes less than $k$.
